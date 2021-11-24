@@ -1,0 +1,32 @@
+	Query : find all movies which are equal to movie_name...?
+    Ans : > db.movies.find({title:{$eq:"Clear History"}},{"title":1,"production_year":1,"_id":0}).pretty();    
+
+    Query : find all movies which are not equal to movie_name..?
+    Ans :  > db.movies.find({title:{$ne:"Clear History"}},{"title":1,"production_year":1,"_id":0}).pretty();.
+
+    Query : find all movies greater than and greater than equal to a budget  ..?
+    Ans : db.movies.find({"budget":{$gte:"2000"}},{"title":1,"production_year":1,"_id":0}).pretty();.
+
+    Query : find all movies less than and less than equal to a budget..?
+    Ans : db.movies.find({"budget":{$lt:"2000"}},{"title":1,"production_year":1,"_id":0}).pretty();.
+
+    Query :  find all movies that are produced after 2000 with budget greater than 10000..?
+    Ans : db.movies.find({$and:[{"production_year":{$gt:10000}},{"budget":{$gt:"2000"}}]},{"title":1,"production_year":1,"_id":0}).pretty();
+
+    Query : find all movies that are produced after 2000 or budget greater than 10000 ..?
+    Ans : db.movies.find({$or:[{"production_year":{$gt:2000}},{"budget":{$gt:"10000"}}]},{"title":1,"production_year":1,"_id":0}).pretty()
+
+    Query : find all movies that are neither produced after 2000 nor with budget greater than 10000.?
+    Ans :  db.movies.find({$nor: [{"production_year":{$gt:2000}},{"budget":{$gt:"10000"}}]}).pretty();
+
+    Query : find all movies that are not produced in 2000 or they do not have budget of 10000 .?
+    Ans : db.movies.find({$or:[{"production_year":{$not:{$eq:2000}}},{"budget":{$not:{$eq:"10000"}}}]},{"title":1,"production_year":1,"_id":0}).pretty();
+
+    Query : find all movies that were produced from 2000 to 2010 .?
+    Ans :  db.movies.find({"production_year":{$in:[2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010]}}).pretty();
+
+    Query : Sort all movies descending based on the production year and if the year is same then alphabetically for their movie_names .?
+    Ans : db.movies.find({},{"title":1,"production_year":1,"_id":0}).sort({"production_year":-1,"title":1},{"title":1}).pretty();
+
+    Query : in query 10 skip the first 10 entries and fetch the next 5.?
+    Ans : db.movies.find({},{"title":1,"production_year":1,"_id":0}).sort({"production_year":-1,"title":1},{"title":1}).pretty().skip(10).limit(5);
